@@ -1,0 +1,329 @@
+/* Style for the whole page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    position: relative;
+}
+
+.game-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 350px;
+    text-align: center;
+    position: relative;
+}
+
+.game-title {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #FFB3D9, #A3D8F4); /* สีชมพูฟ้าพาสเทล */
+    -webkit-background-clip: text; /* ให้สีที่ใช้ gradient ครอบคลุมข้อความ */
+    color: transparent; /* ทำให้ข้อความมีสีตาม gradient */
+    margin-bottom: 20px;
+}
+
+
+/* สถานะเกมที่แสดงข้อความ เช่น "O wins!" หรือ "It's a draw!" */
+.game-status {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ff5722;
+}
+
+/* Scoreboard */
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.score-item {
+    font-size: 1.2rem;
+}
+
+.score-item span {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* game-board ต้องมี position: relative เพื่อให้ win-line อยู่ในตำแหน่งที่สัมพันธ์ */
+#game-board {
+    display: inline-block;
+    margin-top: 20px;
+    position: relative;  /* ทำให้เส้นวาดภายใน game-board */
+}
+
+/* เพิ่มแอนิเมชั่นการขยายเมื่อคลิกที่ช่อง */
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
+}
+
+/* เมื่อคลิกที่เซลล์ */
+.cell:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+
+/* สไตล์สำหรับ X */
+.cell.x {
+    background-color: #ff6666;
+    animation: popIn 0.3s ease-in-out;
+}
+
+/* สไตล์สำหรับ O */
+.cell.o {
+    background-color: #66cc66;
+    animation: popIn 0.3s ease-in-out;
+}
+
+/* เอฟเฟ็กต์แอนิเมชันการปรากฏของภาพในเซลล์ */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* แอนิเมชันการเพิ่มขนาดของเซลล์ */
+@keyframes popIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: center;  /* จัดให้อยู่ตรงกลางแนวนอน */
+    align-items: center;  /* จัดให้อยู่ตรงกลางแนวตั้ง */
+    gap: 15px;  /* ระยะห่างระหว่างปุ่ม */
+    margin-top: 20px;  /* ขยับลงมาให้พอดี */
+}
+
+.btn {
+    background-color: #4CAF50;  /* สีพื้นหลังของปุ่ม */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* แอนิเมชันการไฮไลต์เซลล์ที่ชนะ */
+@keyframes winnerHighlight {
+    0% {
+        transform: scale(1);
+        background-color: #ff0;
+    }
+    50% {
+        transform: scale(1.1);
+        background-color: #fff;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #ff0;
+    }
+}
+
+.cell.winner {
+    animation: winnerHighlight 1s ease-in-out;
+}
+
+/* Status */
+.status {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #ff5722;
+}
+
+/* Buttons */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* ปรับสีปุ่มที่มีพื้นหลังเป็นสีชมพูพาสเทล */
+.btn-pink {
+    background-color: #FFB6C1;  /* สีชมพูพาสเทล */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn-pink:hover {
+    background-color: #FF69B4; /* สีชมพูเข้มขึ้นเมื่อ hover */
+}
+
+/* ปรับสีปุ่มที่มีพื้นหลังเป็นสีฟ้าพาสเทล */
+.btn-blue {
+    background-color: #AEC6CF;  /* สีฟ้าพาสเทล */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn-blue:hover {
+    background-color: #5D8AA8; /* ฟ้าเข้มขึ้นเมื่อ hover */
+}
+
+/* Full Score Table */
+.score-table {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.score-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.score-table table th,
+.score-table table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.score-table button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.score-table button:hover {
+    background-color: #d32f2f;
+}
+
+/* ปรับขนาดรูปให้พอดีกับ cell */
+.board .cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* ทำให้รูปภาพไม่ยืดหรือบิดเบี้ยว */
+}
+
+.popup {
+    display: none; /* ซ่อนป๊อปอัพตามปกติ */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* สีพื้นหลังโปร่งใส */
+    justify-content: center;
+    align-items: center;
+}
+
+.popup.show {
+    display: flex; /* แสดงป๊อปอัพเมื่อใช้ class "show" */
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .game-container {
+        width: 90%;
+    }
+
+    .scoreboard {
+        flex-direction: column;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+}
+
+
