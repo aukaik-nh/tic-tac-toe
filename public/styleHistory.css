@@ -1,0 +1,186 @@
+/* สำหรับหน้า Game History */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fb; /* เปลี่ยนเป็นสีเทาอ่อน */
+    margin: 0;
+    padding: 0;
+}
+
+.history-container {
+  
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;  /* เพิ่มความโค้งมน */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* เงาที่นุ่มนวลมากขึ้น */
+    overflow: hidden; /* กำจัด overflow */
+}
+
+
+.history-table {
+    margin-top: 30px;
+    margin-bottom: 40px;  /* เพิ่มระยะห่างจากตาราง */
+    border-radius: 8px; /* เพิ่มความโค้งมน */
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); /* เงาเล็กๆ */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;  /* เพิ่มระยะห่างจากหัวตาราง */
+}
+
+th, td {
+    padding: 12px 20px; /* เพิ่ม padding เพื่อให้ดูโปร่ง */
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #f8f8f8; /* สีพื้นหลังที่ดูสะอาดตา */
+    color: #555;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+td {
+    color: #555;
+    font-size: 1rem;
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* เพิ่มเอฟเฟกต์เมื่อ hover แถว */
+}
+
+.btn {
+    background-color: #4CAF50; /* สีเขียวสวย */
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;  /* โค้งมน */
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: block;
+    margin: 30px auto 0;
+    transition: background-color 0.3s ease; /* เพิ่มการ transition */
+}
+
+.btn:hover {
+    background-color: #45a049; /* เปลี่ยนสีเมื่อ hover */
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.no-history-message {
+    text-align: center;
+    color: #999;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+table thead th {
+    border-top: none; /* ลบขอบด้านบน */
+}
+
+table thead th:first-child {
+    border-top-left-radius: 10px; /* โค้งมนด้านซ้ายบน */
+}
+
+table thead th:last-child {
+    border-top-right-radius: 10px; /* โค้งมนด้านขวาบน */
+}
+
+table tbody tr:last-child td {
+    border-bottom: none; /* ลบขอบด้านล่างของแถวสุดท้าย */
+}
+
+/* สำหรับการแสดงผลที่มีประวัติ */
+.history-table td, .history-table th {
+    font-family: 'Arial', sans-serif;
+}
+
+/* เพิ่มฟอนต์ที่สวยงามสำหรับข้อความ */
+/* เพิ่มสไตล์สำหรับ pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-btn {
+  background-color: transparent;
+  color: #007bff;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1.5rem; /* ปรับขนาดไอคอน */
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn:hover {
+  color: #0056b3; /* สีเมื่อ hover */
+}
+
+#page-number {
+  font-size: 1.2rem;
+  align-self: center;
+  padding: 0 10px;
+}
+/* ปุ่มย้อนกลับ */
+.btn-back {
+  background-color: transparent;
+  color: #000000;
+  font-size: 1.2rem;
+  padding: 8px 15px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px; /* ระยะห่างจากตาราง */
+}
+
+.btn-back:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+.btn-back:focus {
+  outline: none;
+}
+/* ใช้ Flexbox เพื่อจัดตำแหน่ง header */
+/* ใช้ Flexbox เพื่อจัดตำแหน่ง header */
+.header {
+  display: flex;
+  justify-content: center; /* จัดให้ Scoreboard อยู่กลาง */
+  align-items: center;
+  position: relative; /* ทำให้รูปภาพสามารถถูกจัดตำแหน่งที่มุมขวา */
+  margin-bottom: 20px;
+}
+
+/* สไตล์สำหรับชื่อ Scoreboard XOXO */
+.history-title {
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #FFB3D9, #A3D8F4); /* สีชมพูฟ้าพาสเทล */
+  -webkit-background-clip: text; /* ให้สีที่ใช้ gradient ครอบคลุมข้อความ */
+  color: transparent; /* ทำให้ข้อความมีสีตาม gradient */
+  margin: 0;
+  text-align: center;
+}
+
+/* สไตล์สำหรับรูป boy.png ที่ข้างๆ ชื่อ Scoreboard XOXO */
+.top-right-img {
+  width: 71px;
+  height: 105px;
+  object-fit: cover; /* ให้รูปภาพพอดีกับกรอบ */
+  position: absolute;
+  right: 20px; /* จัดให้รูปอยู่ขวามือ */
+}

@@ -13,18 +13,22 @@ body {
 }
 
 .game-container {
-    background-color: #fff;
+    background-image: url('assets/unnamed_1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.5); /* ปรับค่าความจางของพื้นหลัง */
+    background-blend-mode: lighten;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 350px;
+    width: 1000px;
     text-align: center;
     position: relative;
 }
 
 .game-title {
     font-size: 2.5rem;
-    background: linear-gradient(to right, #FFB3D9, #A3D8F4); /* สีชมพูฟ้าพาสเทล */
+    background: linear-gradient(to right, #000000, #838383); /* สีชมพูฟ้าพาสเทล */
     -webkit-background-clip: text; /* ให้สีที่ใช้ gradient ครอบคลุมข้อความ */
     color: transparent; /* ทำให้ข้อความมีสีตาม gradient */
     margin-bottom: 20px;
@@ -36,19 +40,39 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #ff5722;
+    color: #000000;
 }
 
 /* Scoreboard */
 .scoreboard {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 20px;
 }
 
+/* Default border style */
 .score-item {
     font-size: 1.2rem;
+    border: solid 3px #000;
+    border-radius: 10px;
+    padding: 10px;
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
 }
+
+/* เปลี่ยนเส้นเป็นสีเขียวเมื่อเสมอ */
+.score-item.draw {
+    border-color: green;
+}
+/* Border color when it's the player's turn */
+.player-turn {
+    border-color: #ff98cb; /* Player's color */
+}
+
+/* Border color when it's the bot's turn */
+.bot-turn {
+    border-color: #ff98cb; /* Bot's color */
+}
+
 
 .score-item span {
     font-weight: bold;
@@ -81,6 +105,7 @@ body {
     transition: background-color 0.3s, transform 0.2s ease-in-out;
     animation: fadeIn 0.5s ease-in-out;
     position: relative;
+    overflow: hidden; 
 }
 
 /* เมื่อคลิกที่เซลล์ */
@@ -169,10 +194,13 @@ body {
 }
 
 /* Status */
-.status {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #ff5722;
+/* สไตล์สำหรับสถานะเกม */
+#status {
+    font-family: 'Roboto', sans-serif; /* ใช้ฟอนต์ Roboto */
+    font-size: 14px; /* ขนาดตัวอักษรเล็ก */
+    font-weight: 500; /* น้ำหนักตัวอักษรปานกลาง */
+    color: #333; /* สีตัวอักษรเทาเข้ม */
+    margin-bottom: 15px;
 }
 
 /* Buttons */
@@ -199,7 +227,7 @@ body {
 
 /* ปรับสีปุ่มที่มีพื้นหลังเป็นสีชมพูพาสเทล */
 .btn-pink {
-    background-color: #FFB6C1;  /* สีชมพูพาสเทล */
+    background-color: #ea99a6;  /* สีชมพูพาสเทล */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -215,13 +243,13 @@ body {
 
 /* ปรับสีปุ่มที่มีพื้นหลังเป็นสีฟ้าพาสเทล */
 .btn-blue {
-    background-color: #AEC6CF;  /* สีฟ้าพาสเทล */
+    background-color: #e88e9c; 
     color: white;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 22px;
     transition: background 0.3s ease;
 }
 
@@ -272,43 +300,146 @@ body {
     height: 100%;
     object-fit: contain;  /* ทำให้รูปภาพไม่ยืดหรือบิดเบี้ยว */
 }
-
+/* สไตล์สำหรับ background ของป๊อปอัพ */
 .popup {
-    display: none; /* ซ่อนป๊อปอัพตามปกติ */
+    display: none; /* ซ่อนป๊อปอัพโดยเริ่มต้น */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* สีพื้นหลังโปร่งใส */
+    background: rgba(0, 0, 0, 0.5); /* พื้นหลังมืดๆ */
     justify-content: center;
     align-items: center;
+    transition: opacity 0.3s ease; /* ทำให้การแสดงและซ่อนมีความนุ่มนวล */
+}
+/* Popup Styles */
+/* ป๊อปอัพพื้นฐาน */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.2s ease; /* ลดเวลา transition ให้เร็วขึ้น */
 }
 
+/* เมื่อแสดงป๊อปอัพ */
 .popup.show {
-    display: flex; /* แสดงป๊อปอัพเมื่อใช้ class "show" */
+    display: flex;
+    opacity: 1;
 }
 
+/* สไตล์ของเนื้อหาภายในป๊อปอัพ */
 .popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
     text-align: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    width: 50%;  /* ลดขนาดความกว้างลง */
+    max-width: 250px;  /* จำกัดความกว้างสุดที่ 250px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: popup-animation 0.1s ease-in-out; /* แอนิเมชันที่เร็วขึ้น */
 }
 
-.popup button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: #007bff;
+/* ขนาดข้อความในป๊อปอัพ */
+.popup-message {
+    font-size: 16px;  /* ขนาดฟอนต์เล็กลง */
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* ปรับขนาดปุ่มปิด */
+.btn-close {
+    background-color: #FF5733;
     color: white;
+    padding: 6px 12px;  /* ขนาดปุ่มเล็กลง */
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.popup button:hover {
-    background: #0056b3;
+.btn-close:hover {
+    background-color: #FF2A00;
+}
+
+/* แอนิเมชันของป๊อปอัพ */
+@keyframes popup-animation {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ป๊อปอัพหัวข้อ */
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.popup-header h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+/* ส่วนเนื้อหาภายในป๊อปอัพ */
+.popup-body {
+    margin-top: 15px;
+}
+
+.scoreboard-ex {
+    position: absolute; /* ใช้ position absolute เพื่อวางตำแหน่งตามที่ต้องการ */
+    top: 20px; /* ห่างจากด้านบน */
+    left: 50%; /* อยู่ตรงกลาง */
+    transform: translateX(-50%); /* ให้มันอยู่กลางหน้าจอ */
+    background-color: transparent; /* เอาสีพื้นหลังออก */
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* จัดให้อยู่กลางแนวตั้ง */
+    font-size: 1rem; /* ขนาดตัวอักษรให้อ่านง่าย */
+    z-index: 9999; /* ให้อยู่เหนือเนื้อหาอื่นๆ */
+}
+
+.score-item-ex {
+    margin-bottom: 8px;
+}
+
+.score-image-ex {
+    width: 25px; /* ขยายขนาดของภาพให้เห็นชัด */
+    height: 25px;
+    object-fit: contain;
+    margin-right: 8px;
+}
+
+.scoreboard-ex p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+.board {
+    background-image: url('/assets/wood.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px; /* ทำให้ขอบโค้งนิดหน่อย */
+    padding: 10px;
 }
 
 /* Responsive Design */
