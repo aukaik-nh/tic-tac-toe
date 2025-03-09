@@ -95,15 +95,16 @@ function checkWin(player) {
 function updateScore(winner) {
     if (winner === "Player") { 
         playerScore++;   
-        consecutiveWins++;  
+        consecutiveWins++; 
 
         if (consecutiveWins === 3) {
             playerScore++;  
-            consecutiveWins = 0;   
+            consecutiveWins = 0;  
         }
     } else if (winner === "Bot") { 
         botScore++;  
         consecutiveWins = 0;   
+        playerScore--;  
     }
     const playerScoreElement = document.getElementById("player-score");
     const botScoreElement = document.getElementById("bot-score");
