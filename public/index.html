@@ -10,26 +10,36 @@
 </head>
 <body>
   <main class="game-container">
-    <header>
-      <h1 class="game-title">XOXO Game</h1>
-      <div class="instructions">
+  <header>
+      <h1 class="game-title">OXOX Game</h1>
+      <!-- <div class="instructions">
         <p>
             <img src="assets/x-image.png" alt="Player" class="score-image-ex" /> Player
          VS.
             <img src="assets/o-image.png" alt="Bot" class="score-image-ex" /> Bot
         </p>
-      </div>
-    </header>
+      </div> -->
+    </header> 
 
 
     <section class="scoreboard">
       <div class="score-item player">
-        Player Score <span id="player-score">-</span>
+          <div class="score-text">
+              <img src="assets/x-image.png" alt="Player" class="score-image-ex" />
+              <span>Player Score</span>
+          </div>
+          <span id="player-score" class="score-value">-</span>
       </div>
+  
       <div class="score-item bot">
-        Bot Score <span id="bot-score">-</span>
+          <div class="score-text">
+              <img src="assets/o-image.png" alt="Bot" class="score-image-ex" />
+              <span>Bot Score</span>
+          </div>
+          <span id="bot-score" class="score-value">-</span>
       </div>
-    </section>
+  </section>
+  
     <section id="status" class="game-status">Player Start</section>
     <section id="game-board" class="board">
       <div class="row">

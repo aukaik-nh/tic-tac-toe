@@ -176,35 +176,36 @@ function minimax(board, depth, isMaximizing) {
     //     return best + Math.random() * 0.5 - 0.25; 
     // }
 
-    if (Math.random() < 0.5) {
+    if (Math.random() < 0.2) {
         return best + Math.random() * 0.5 - 0.25; 
     }
     
     return best;
 }
-
 function resetGame() {
-    board = ["", "", "", "", "", "", "", "", ""];
+    board = ["", "", "", "", "", "", "", "", ""]; 
     currentPlayer = "Player"; 
     gameStatus.textContent = "Player Start"; 
 
     document.querySelectorAll(".cell").forEach(cell => {
         cell.textContent = "";
-        cell.classList.remove("winner"); 
+        cell.classList.remove("winner");
     });
 
     document.querySelectorAll(".score-item").forEach(item => {
         item.classList.remove("draw", "player-turn", "bot-turn"); 
         item.style.borderColor = "black";  
+        item.style.boxShadow = "none"; 
     });
 
     changeTurn();  
-    
+
     if (gameStatus.textContent === "Player Start" || gameStatus.textContent.includes("draw")) {
         document.querySelector('.score-item.player').style.borderColor = "black";
         document.querySelector('.score-item.bot').style.borderColor = "black";
     }
 }
+
 
 
 function drawWinLine(pattern) {
@@ -273,33 +274,35 @@ function endGame(playerScore, botScore, consecutiveWins) {
 
     if (playerScore > botScore) {
         resultMessage = "Player Wins!";
+        document.querySelector('.score-item.player').style.boxShadow = "0 0 15px rgba(255, 105, 180, 0.8)";
+        document.querySelector('.score-item.bot').style.boxShadow = "none";
     } else if (botScore > playerScore) {
         resultMessage = "Bot Wins!";
+        document.querySelector('.score-item.bot').style.boxShadow = "0 0 15px rgba(255, 105, 180, 0.8)";
+        document.querySelector('.score-item.player').style.boxShadow = "none";
     } else {
         resultMessage = "It's a Draw!";
+        document.querySelector('.score-item.player').style.boxShadow = "0 0 15px rgba(0, 255, 0, 0.8)";
+        document.querySelector('.score-item.bot').style.boxShadow = "0 0 15px rgba(0, 255, 0, 0.8)";
     }
 
     saveGameHistory(playerScore, botScore, consecutiveWins, resultMessage);
     // resetGameData()
 }
-
 function saveGameHistory(playerScore, botScore, consecutiveWins, result) {
     console.log("Saving game history...");
 
-    // ดึงข้อมูลจาก LocalStorage (หากมี)
     const gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
 
-    // เพิ่มข้อมูลเกมใหม่
     const newGame = {
         playerScore: playerScore,
         botScore: botScore,
         consecutiveWins: consecutiveWins,
-        result: result // ผลลัพธ์ของเกม
+        result: result 
     };
 
     gameHistory.push(newGame);
 
-    // บันทึกข้อมูลลงใน LocalStorage
     localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
 
     console.log("Game history saved:", gameHistory);
@@ -310,11 +313,11 @@ function changeTurn() {
     const botScoreElement = document.querySelector('.score-item.bot');
 
     if (currentPlayer === "Player") {
-        playerScoreElement.style.borderColor = "pink";
-        botScoreElement.style.borderColor = "black";
+        playerScoreElement.style.boxShadow = "0 0 15px rgba(255, 105, 180, 0.8)"; 
+        botScoreElement.style.boxShadow = "none"; 
     } else {
-        botScoreElement.style.borderColor = "pink";
-        playerScoreElement.style.borderColor = "black";
+        botScoreElement.style.boxShadow = "0 0 15px rgba(255, 105, 180, 0.8)"; 
+        playerScoreElement.style.boxShadow = "none"; 
     }
 
     const cells = document.querySelectorAll(".cell");

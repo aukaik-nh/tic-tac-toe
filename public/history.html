@@ -9,13 +9,13 @@
   </head>
 
   <body>
-   
-      <main class="history-container">
-        <header class="header">
-          <h1 class="history-title">Scoreboard OXOX</h1>
-          <img src="assets/boy.png" alt="Boy" class="top-right-img" />
-        </header>
-  
+    <main class="history-container">
+      <header class="header">
+        <h1 class="history-title">Scoreboard OXOX</h1>
+        <img src="assets/girl.png" alt="Girl" class="top-left-img" />
+        <img src="assets/boy.png" alt="Boy" class="top-right-img" />
+      </header>
+
       <section class="history-table">
         <button class="btn-back" onclick="goBack()">← Back</button>
         <table>
@@ -32,68 +32,67 @@
           </tbody>
         </table>
 
-  
         <div class="pagination">
           <button class="page-btn" id="prevBtn" onclick="changePage(-1)">
-            <i class="fas fa-chevron-left"></i> 
+            <i class="fas fa-chevron-left"></i>
           </button>
           <span id="page-number">Page 1</span>
           <button class="page-btn" id="nextBtn" onclick="changePage(1)">
-            <i class="fas fa-chevron-right"></i> 
+            <i class="fas fa-chevron-right"></i>
           </button>
         </div>
       </section>
     </main>
 
     <script>
-      let currentPage = 1;
-      const itemsPerPage = 10; 
-      const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
+     let currentPage = 1;
+const itemsPerPage = 7; 
+const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
 
-      function changePage(direction) {
-        const totalPages = Math.ceil(history.length / itemsPerPage);
-        currentPage += direction;
-        if (currentPage < 1) currentPage = 1;
-        if (currentPage > totalPages) currentPage = totalPages;
+function changePage(direction) {
+  const totalPages = Math.ceil(history.length / itemsPerPage);
+  currentPage += direction;
+  if (currentPage < 1) currentPage = 1;
+  if (currentPage > totalPages) currentPage = totalPages;
 
-        loadHistory();
-        updatePageNumber(); 
-      }
+  loadHistory();
+  updatePageNumber();
+}
 
-      function updatePageNumber() {
-        document.getElementById('page-number').textContent = `Page ${currentPage}`;
-      }
+function updatePageNumber() {
+  document.getElementById('page-number').textContent = `Page ${currentPage}`;
+}
 
-      function loadHistory() {
-        const historyBody = document.getElementById('history-body');
-       
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
+function loadHistory() {
+  const historyBody = document.getElementById('history-body');
 
-        const paginatedHistory = history.slice(startIndex, endIndex);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-        historyBody.innerHTML = ''; 
+  const paginatedHistory = history.slice(startIndex, endIndex);
 
-        paginatedHistory.forEach((entry, index) => {
-          const row = document.createElement('tr');
-          let result = entry.result || "No Result";  
+  historyBody.innerHTML = '';
 
-          row.innerHTML = `
-            <td>${startIndex + index + 1}</td>
-            <td>${entry.playerScore}</td>
-            <td>${entry.botScore}</td>
-            <td>${result}</td>
-            <td>${entry.consecutiveWins}</td>
-          `;
-          historyBody.appendChild(row);
-        });
-      }
+  paginatedHistory.forEach((entry, index) => {
+    const row = document.createElement('tr');
+    let result = entry.result || "No Result";
 
-      loadHistory();
+    row.innerHTML = `
+      <td>${startIndex + index + 1}</td>
+      <td>${entry.playerScore}</td>
+      <td>${entry.botScore}</td>
+      <td>${result}</td>
+      <td>${entry.consecutiveWins}</td>
+    `;
+    historyBody.appendChild(row);
+  });
+}
 
-      function goBack() {
-        window.location.href = 'index.html'; 
-      }
+loadHistory();
+
+function goBack() {
+  window.location.href = 'index.html';
+}
     </script>
   </body>
 </html>
