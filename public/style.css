@@ -1,4 +1,4 @@
-/* Style for the whole page */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f7fa;
@@ -16,7 +16,7 @@ body {
     background-image: url('assets/unnamed_1.jpg');
     background-size: cover;
     background-position: center;
-    background-color: rgba(255, 255, 255, 0.5); /* ปรับค่าความจางของพื้นหลัง */
+    background-color: rgba(255, 255, 255, 0.5);
     background-blend-mode: lighten;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -28,14 +28,12 @@ body {
 
 .game-title {
     font-size: 2.5rem;
-    background: linear-gradient(to right, #000000, #838383); /* สีชมพูฟ้าพาสเทล */
-    -webkit-background-clip: text; /* ให้สีที่ใช้ gradient ครอบคลุมข้อความ */
-    color: transparent; /* ทำให้ข้อความมีสีตาม gradient */
+    background: linear-gradient(to right, #000000, #838383); 
+    -webkit-background-clip: text; 
+    color: transparent; 
     margin-bottom: 20px;
 }
 
-
-/* สถานะเกมที่แสดงข้อความ เช่น "O wins!" หรือ "It's a draw!" */
 .game-status {
     font-size: 1.5rem;
     font-weight: bold;
@@ -43,50 +41,43 @@ body {
     color: #000000;
 }
 
-/* Scoreboard */
 .scoreboard {
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
 }
 
-/* Default border style */
 .score-item {
     font-size: 1.2rem;
     border: solid 3px #000;
     border-radius: 10px;
     padding: 10px;
-    transition: border-color 0.3s ease; /* Smooth transition for border color */
+    transition: border-color 0.3s ease; 
 }
 
-/* เปลี่ยนเส้นเป็นสีเขียวเมื่อเสมอ */
 .score-item.draw {
     border-color: green;
 }
-/* Border color when it's the player's turn */
+
 .player-turn {
-    border-color: #ff98cb; /* Player's color */
+    border-color: #ff98cb; 
 }
 
-/* Border color when it's the bot's turn */
 .bot-turn {
-    border-color: #ff98cb; /* Bot's color */
+    border-color: #ff98cb; 
 }
-
 
 .score-item span {
     font-weight: bold;
     font-size: 1.3rem;
 }
 
-/* game-board ต้องมี position: relative เพื่อให้ win-line อยู่ในตำแหน่งที่สัมพันธ์ */
 #game-board {
     display: inline-block;
     margin-top: 20px;
-    position: relative;  /* ทำให้เส้นวาดภายใน game-board */
+    position: relative;  
 }
 
-/* เพิ่มแอนิเมชั่นการขยายเมื่อคลิกที่ช่อง */
 .row {
     display: flex;
     justify-content: center;
@@ -108,26 +99,22 @@ body {
     overflow: hidden; 
 }
 
-/* เมื่อคลิกที่เซลล์ */
 .cell:hover {
     background-color: #e0e0e0;
     transform: scale(1.05);
 }
 
 
-/* สไตล์สำหรับ X */
 .cell.x {
     background-color: #ff6666;
     animation: popIn 0.3s ease-in-out;
 }
 
-/* สไตล์สำหรับ O */
 .cell.o {
     background-color: #66cc66;
     animation: popIn 0.3s ease-in-out;
 }
 
-/* เอฟเฟ็กต์แอนิเมชันการปรากฏของภาพในเซลล์ */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -137,7 +124,6 @@ body {
     }
 }
 
-/* แอนิเมชันการเพิ่มขนาดของเซลล์ */
 @keyframes popIn {
     0% {
         transform: scale(0.5);
@@ -149,17 +135,16 @@ body {
     }
 }
 
-/* Controls */
 .controls {
     display: flex;
-    justify-content: center;  /* จัดให้อยู่ตรงกลางแนวนอน */
-    align-items: center;  /* จัดให้อยู่ตรงกลางแนวตั้ง */
-    gap: 15px;  /* ระยะห่างระหว่างปุ่ม */
-    margin-top: 20px;  /* ขยับลงมาให้พอดี */
+    justify-content: center;  
+    align-items: center;  
+    gap: 15px;  
+    margin-top: 20px;  
 }
 
 .btn {
-    background-color: #4CAF50;  /* สีพื้นหลังของปุ่ม */
+    background-color: #4CAF50;  
     color: white;
     border: none;
     padding: 10px 20px;
@@ -173,7 +158,6 @@ body {
     background-color: #45a049;
 }
 
-/* แอนิเมชันการไฮไลต์เซลล์ที่ชนะ */
 @keyframes winnerHighlight {
     0% {
         transform: scale(1);
@@ -193,17 +177,15 @@ body {
     animation: winnerHighlight 1s ease-in-out;
 }
 
-/* Status */
-/* สไตล์สำหรับสถานะเกม */
+
 #status {
-    font-family: 'Roboto', sans-serif; /* ใช้ฟอนต์ Roboto */
-    font-size: 14px; /* ขนาดตัวอักษรเล็ก */
-    font-weight: 500; /* น้ำหนักตัวอักษรปานกลาง */
-    color: #333; /* สีตัวอักษรเทาเข้ม */
+    font-family: 'Roboto', sans-serif; 
+    font-size: 14px; 
+    font-weight: 500; 
+    color: #333;
     margin-bottom: 15px;
 }
 
-/* Buttons */
 .controls {
     display: flex;
     justify-content: space-around;
@@ -225,9 +207,8 @@ body {
     background-color: #45a049;
 }
 
-/* ปรับสีปุ่มที่มีพื้นหลังเป็นสีชมพูพาสเทล */
 .btn-pink {
-    background-color: #ea99a6;  /* สีชมพูพาสเทล */
+    background-color: #ea99a6; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -238,10 +219,9 @@ body {
 }
 
 .btn-pink:hover {
-    background-color: #FF69B4; /* สีชมพูเข้มขึ้นเมื่อ hover */
+    background-color: #FF69B4; 
 }
 
-/* ปรับสีปุ่มที่มีพื้นหลังเป็นสีฟ้าพาสเทล */
 .btn-blue {
     background-color: #e88e9c; 
     color: white;
@@ -254,10 +234,9 @@ body {
 }
 
 .btn-blue:hover {
-    background-color: #5D8AA8; /* ฟ้าเข้มขึ้นเมื่อ hover */
+    background-color: #5D8AA8; 
 }
 
-/* Full Score Table */
 .score-table {
     display: none;
     background-color: #fff;
@@ -294,72 +273,72 @@ body {
     background-color: #d32f2f;
 }
 
-/* ปรับขนาดรูปให้พอดีกับ cell */
 .board .cell img {
     width: 100%;
     height: 100%;
-    object-fit: contain;  /* ทำให้รูปภาพไม่ยืดหรือบิดเบี้ยว */
-}
-/* สไตล์สำหรับ background ของป๊อปอัพ */
-.popup {
-    display: none; /* ซ่อนป๊อปอัพโดยเริ่มต้น */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* พื้นหลังมืดๆ */
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease; /* ทำให้การแสดงและซ่อนมีความนุ่มนวล */
-}
-/* Popup Styles */
-/* ป๊อปอัพพื้นฐาน */
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none; /* Initially hidden */
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.2s ease; /* ลดเวลา transition ให้เร็วขึ้น */
+    object-fit: contain;  
 }
 
-/* เมื่อแสดงป๊อปอัพ */
-.popup.show {
-    display: flex;
+
+.popup {
+    position: fixed;  
+    top: 50%;        
+    left: 50%;        
+    transform: translate(-50%, -50%); 
+    background-color: rgba(0, 0, 0, 0.7); 
+    width: 100%;     
+    height: 100%;     
+    display: flex;  
+    justify-content: center; 
+    align-items: center;    
+    visibility: hidden; 
+    opacity: 0;       
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+ 
+  .popup.show {
+    visibility: visible;
     opacity: 1;
-}
-
-/* สไตล์ของเนื้อหาภายในป๊อปอัพ */
-.popup-content {
-    background-color: #fff;
-    padding: 15px;
+  }
+  
+  .popup-content {
+    background: #fff;
+    padding: 20px;
     border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
     text-align: center;
-    width: 50%;  /* ลดขนาดความกว้างลง */
-    max-width: 250px;  /* จำกัดความกว้างสุดที่ 250px */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: popup-animation 0.1s ease-in-out; /* แอนิเมชันที่เร็วขึ้น */
-}
-
-/* ขนาดข้อความในป๊อปอัพ */
-.popup-message {
-    font-size: 16px;  /* ขนาดฟอนต์เล็กลง */
-    margin-bottom: 15px;
+  }
+  
+  #popup-message {
+    font-size: 18px;
     color: #333;
-}
-
-/* ปรับขนาดปุ่มปิด */
+    margin: 0;
+  }
+  
+  
+  .btn-primary {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #45a049; 
+  }
+  
+  .popup:hover {
+    cursor: pointer;
+  }
+  
 .btn-close {
     background-color: #FF5733;
     color: white;
-    padding: 6px 12px;  /* ขนาดปุ่มเล็กลง */
+    padding: 6px 12px; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -370,7 +349,6 @@ body {
     background-color: #FF2A00;
 }
 
-/* แอนิเมชันของป๊อปอัพ */
 @keyframes popup-animation {
     0% {
         transform: scale(0.8);
@@ -382,7 +360,6 @@ body {
     }
 }
 
-/* ป๊อปอัพหัวข้อ */
 .popup-header {
     display: flex;
     justify-content: space-between;
@@ -397,25 +374,24 @@ body {
     color: #333;
 }
 
-/* ส่วนเนื้อหาภายในป๊อปอัพ */
 .popup-body {
     margin-top: 15px;
 }
 
 .scoreboard-ex {
-    position: absolute; /* ใช้ position absolute เพื่อวางตำแหน่งตามที่ต้องการ */
-    top: 20px; /* ห่างจากด้านบน */
-    left: 50%; /* อยู่ตรงกลาง */
-    transform: translateX(-50%); /* ให้มันอยู่กลางหน้าจอ */
-    background-color: transparent; /* เอาสีพื้นหลังออก */
+    position: absolute; 
+    top: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    background-color: transparent; 
     color: white;
     padding: 15px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* จัดให้อยู่กลางแนวตั้ง */
-    font-size: 1rem; /* ขนาดตัวอักษรให้อ่านง่าย */
-    z-index: 9999; /* ให้อยู่เหนือเนื้อหาอื่นๆ */
+    align-items: center; 
+    font-size: 1rem; 
+    z-index: 9999; 
 }
 
 .score-item-ex {
@@ -423,7 +399,7 @@ body {
 }
 
 .score-image-ex {
-    width: 25px; /* ขยายขนาดของภาพให้เห็นชัด */
+    width: 25px; 
     height: 25px;
     object-fit: contain;
     margin-right: 8px;
@@ -438,7 +414,7 @@ body {
     background-image: url('/assets/wood.jpg');
     background-size: cover;
     background-position: center;
-    border-radius: 10px; /* ทำให้ขอบโค้งนิดหน่อย */
+    border-radius: 10px; 
     padding: 10px;
 }
 

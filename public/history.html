@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game History</title>
     <link rel="stylesheet" href="styleHistory.css" />
-    <!-- เพิ่มลิงก์สำหรับ Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   </head>
 
@@ -16,8 +15,6 @@
           <h1 class="history-title">Scoreboard OXOX</h1>
           <img src="assets/boy.png" alt="Boy" class="top-right-img" />
         </header>
-
-      </header>
   
       <section class="history-table">
         <button class="btn-back" onclick="goBack()">← Back</button>
@@ -32,18 +29,17 @@
             </tr>
           </thead>
           <tbody id="history-body">
-            <!-- ประวัติการเล่นจะแสดงที่นี่ -->
           </tbody>
         </table>
 
-        <!-- เพิ่มส่วนของ Pagination -->
+  
         <div class="pagination">
           <button class="page-btn" id="prevBtn" onclick="changePage(-1)">
-            <i class="fas fa-chevron-left"></i> <!-- ไอคอนลูกศรซ้าย -->
+            <i class="fas fa-chevron-left"></i> 
           </button>
           <span id="page-number">Page 1</span>
           <button class="page-btn" id="nextBtn" onclick="changePage(1)">
-            <i class="fas fa-chevron-right"></i> <!-- ไอคอนลูกศรขวา -->
+            <i class="fas fa-chevron-right"></i> 
           </button>
         </div>
       </section>
@@ -51,41 +47,36 @@
 
     <script>
       let currentPage = 1;
-      const itemsPerPage = 10; // จำนวนรายการที่จะแสดงในแต่ละหน้า
+      const itemsPerPage = 10; 
+      const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
 
-      // ฟังก์ชันเพื่อเปลี่ยนหน้า
       function changePage(direction) {
         const totalPages = Math.ceil(history.length / itemsPerPage);
         currentPage += direction;
         if (currentPage < 1) currentPage = 1;
         if (currentPage > totalPages) currentPage = totalPages;
 
-        loadHistory(); // รีโหลดข้อมูลใหม่ตามหน้า
-        updatePageNumber(); // อัปเดตหมายเลขหน้า
+        loadHistory();
+        updatePageNumber(); 
       }
 
-      // ฟังก์ชันในการอัปเดตหมายเลขหน้า
       function updatePageNumber() {
         document.getElementById('page-number').textContent = `Page ${currentPage}`;
       }
 
-      // ฟังก์ชันเพื่อโหลดประวัติจาก LocalStorage
       function loadHistory() {
-        const history = JSON.parse(localStorage.getItem('gameHistory')) || [];
         const historyBody = document.getElementById('history-body');
-
-        // คำนวณตำแหน่งเริ่มต้นและสิ้นสุดของข้อมูลที่จะแสดงในแต่ละหน้า
+       
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
 
-        // แสดงข้อมูลที่ตรงกับหน้าปัจจุบัน
         const paginatedHistory = history.slice(startIndex, endIndex);
 
-        historyBody.innerHTML = ''; // ลบข้อมูลเก่าออก
+        historyBody.innerHTML = ''; 
 
         paginatedHistory.forEach((entry, index) => {
           const row = document.createElement('tr');
-          let result = entry.result || "No Result";  // ถ้าไม่มีผลลัพธ์ให้ใช้ข้อความ "No Result"
+          let result = entry.result || "No Result";  
 
           row.innerHTML = `
             <td>${startIndex + index + 1}</td>
@@ -98,12 +89,10 @@
         });
       }
 
-      // โหลดข้อมูลเมื่อเริ่มต้น
       loadHistory();
 
-      // ฟังก์ชันเพื่อกลับไปที่หน้าหลัก
       function goBack() {
-        window.location.href = 'index.html';  // ปรับให้ตรงกับชื่อไฟล์หน้าเกมหลัก
+        window.location.href = 'index.html'; 
       }
     </script>
   </body>

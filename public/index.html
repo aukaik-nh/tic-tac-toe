@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tic-Tac-Toe Game</title>
+  
   <link rel="stylesheet" href="style.css" />
-  <!-- แนะนำให้ใช้ Google Fonts เพื่อเพิ่มความทันสมัย -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -49,9 +49,8 @@
       </div>
     </section>
 
-    <!-- Popup -->
-    <aside id="popup" class="popup">
-      <div class="popup-content">
+    <aside id="popup" class="popup" onclick="closePopup(event)">
+      <div class="popup-content" onclick="event.stopPropagation();">
         <div class="popup-header">
           <h2 id="popup-message" class="popup-message">Game Over!</h2>
         </div>
@@ -60,18 +59,14 @@
         </div>
       </div>
     </aside>
-
-    <!-- Controls -->
+    
     <section class="controls">
         <!-- <button class="btn-pink" onclick="resetGame()">Reset Game</button>
         <button class="btn-blue" onclick="viewFullScore()">View Full Score</button> -->
-  
         <button class="btn-blue" onclick="goToHistory()">View Game History</button>
       </section>
       
-
-    <!-- Full Scoreboard -->
-    <section id="score-table" class="score-table">
+    <!-- <section id="score-table" class="score-table">
       <h2>Full Scoreboard</h2>
       <table>
         <thead>
@@ -90,14 +85,14 @@
         </tbody>
       </table>
       <button class="btn" onclick="hideScoreTable()">Close</button>
-    </section>
+    </section> -->
   </main>
 
   <script src="script.js"></script>
 </body>
 </html>
 <script>
-    // ฟังก์ชันเพื่อไปยังหน้าประวัติ
+
     function goToHistory() {
       window.location.href = 'history.html';
     }
