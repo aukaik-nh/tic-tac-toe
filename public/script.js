@@ -118,14 +118,16 @@ function updateScore(winner) {
     if (botScoreFullElement) botScoreFullElement.textContent = botScore;
     if (consecutiveWinsElement) consecutiveWinsElement.textContent = consecutiveWins;
 }
+
+
 function botMove() {
     let availableMoves = board.map((cell, index) => cell === "" ? index : null).filter(index => index !== null);
-
-    if (Math.random() < 0.3) {
+    
+    if (Math.random() < 0.2) { 
         let move = availableMoves[Math.floor(Math.random() * availableMoves.length)];
         makeMove(move);
     } else {
-        let move = bestMove();
+        let move = bestMove();  
         makeMove(move);
     }
 }
@@ -133,41 +135,34 @@ function botMove() {
 function bestMove() {
     let bestScore = -Infinity;
     let move;
-    let maxDepth = 5;  
-    let availableMoves = [];
+    let maxDepth = 3;  
     for (let i = 0; i < 9; i++) {
         if (board[i] === "") {
-            availableMoves.push(i);
-        }
-    }
-
-    for (let i = 0; i < availableMoves.length; i++) {
-        let moveIndex = availableMoves[i];
-        board[moveIndex] = "Bot";  
-        let score = minimax(board, 0, false, maxDepth);
-        board[moveIndex] = "";
-
-        if (score > bestScore || (score === bestScore && Math.random() < 0.4)) { 
-            bestScore = score;
-            move = moveIndex;
+            board[i] = "Bot";
+            let score = minimax(board, 0, false, maxDepth);
+            board[i] = "";
+            if (score > bestScore) {
+                bestScore = score;
+                move = i;
+            }
         }
     }
     return move;
 }
 
-function minimax(board, depth, isMaximizing, maxDepth) {
+function minimax(board, depth, isMaximizing) {
     const scores = { "Player": -1, "Bot": 1, "draw": 0 };
     const availableMoves = board.map((val, index) => val === "" ? index : null).filter(index => index !== null);
 
     if (checkWin("Bot")) return 1;
     if (checkWin("Player")) return -1;
-    if (availableMoves.length === 0 || depth >= maxDepth) return 0;
+    if (availableMoves.length === 0) return 0;
 
     let best = isMaximizing ? -Infinity : Infinity;
 
     for (let move of availableMoves) {
         board[move] = isMaximizing ? "Bot" : "Player";
-        let score = minimax(board, depth + 1, !isMaximizing, maxDepth);
+        let score = minimax(board, depth + 1, !isMaximizing);
         board[move] = "";
 
         if (isMaximizing) {
@@ -176,13 +171,17 @@ function minimax(board, depth, isMaximizing, maxDepth) {
             best = Math.min(best, score);
         }
     }
-    if (Math.random() < 0.3) {  
-        return best + Math.random() * 1.5 - 0.75;  
+// ปรับบอท
+    if (Math.random() < 0.1) {
+        return best + Math.random() * 0.5 - 0.25; 
     }
 
+    // if (Math.random() < 0.2) {
+    //     return best + Math.random() * 0.5 - 0.25; 
+    // }
+    
     return best;
 }
-
 function resetGame() {
     board = ["", "", "", "", "", "", "", "", ""]; 
     currentPlayer = "Player"; 
